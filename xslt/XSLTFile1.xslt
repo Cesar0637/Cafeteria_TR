@@ -4,6 +4,9 @@
 >
 	<xsl:output method="html" indent="yes"/>
 
+	<xsl:param name="TipoMenu" select="TipoMenu">
+	</xsl:param>
+	
 	<xsl:template match="Menu">
 
 		<html lang="en">
@@ -44,279 +47,235 @@
 
 
 			<body>
-					<!-- ======= Top Bar ======= -->
-					<div id="topbar" class="d-flex align-items-center fixed-top">
-						<div class="container d-flex justify-content-center justify-content-md-between">
+				<!-- ======= Top Bar ======= -->
+				<div id="topbar" class="d-flex align-items-center fixed-top">
+					<div class="container d-flex justify-content-center justify-content-md-between">
 
-							<div class="contact-info d-flex align-items-center">
-								<i class="bi bi-phone d-flex align-items-center">
-									<span>+1 5589 55488 55</span>
-								</i>
-								<i class="bi bi-clock d-flex align-items-center ms-4">
-									<span> Mon-Sat: 11AM - 23PM</span>
-								</i>
+						<div class="contact-info d-flex align-items-center">
+							<i class="bi bi-phone d-flex align-items-center">
+								<span>+1 5589 55488 55</span>
+							</i>
+							<i class="bi bi-clock d-flex align-items-center ms-4">
+								<span> Mon-Sat: 11AM - 23PM</span>
+							</i>
+						</div>
+
+						<div class="languages d-none d-md-flex align-items-center">
+							<ul>
+								<li>En</li>
+								<li>
+									<a href="#">De</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<!-- ======= Header ======= -->
+				<header id="header" class="fixed-top d-flex align-items-cente">
+					<div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
+
+						<h1 class="logo me-auto me-lg-0">
+							<a href="index.html">Restaurantly</a>
+						</h1>
+						<!-- Uncomment below if you prefer to use an image logo -->
+						<!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+						<nav id="navbar" class="navbar order-last order-lg-0">
+							<ul>
+								<!--creando una lista dinamica a patir de las opciones del XML-->
+								<xsl:for-each select="Opciones/Opcion">
+									<li>
+										<!--xsl:choose funcion como un Switch, permitiendome crear casos que empaten en funcion
+										de ina condicion y declarar una condicion default-->
+										<xsl:choose>
+											<!--xsl:when es equivalente a los case del switch-->
+											<xsl:when test="$TipoMenu = @Id">
+												<!--el uso de "@" hace referencia al un atributo del Nodo en cuestion-->
+												<a class="nav-lin scrollto active" href="{@Url}">
+													<xsl:value-of select="@Texto"/>
+												</a>
+											</xsl:when>
+											<!--xsl:otherwise es equivalente al "default" del Switch-->
+											<xsl:otherwise>
+												<!--el uso del "@" hace referencia a un atributo del nodo en cuestion-->
+												<a class="nav-link scrollto" href="{@Url}">
+													<xsl:value-of select="@Texto"/>
+												</a>
+											</xsl:otherwise>
+										</xsl:choose>
+									</li>
+								</xsl:for-each>
+							</ul>
+							<i class="bi bi-list mobile-nav-toggle"></i>
+						</nav>
+						<!-- .navbar -->
+						<a href="#book-a-table" class="book-a-table-btn scrollto d-none d-lg-flex">Book a table</a>
+
+					</div>
+				</header>
+				<!-- End Header -->
+
+				<!-- ======= Hero Section ======= -->
+				<section id="hero" class="d-flex align-items-center">
+					<div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+						<div class="row">
+							<div class="col-lg-8">
+								<h1>
+									Welcome to <span>Restaurantly</span>
+								</h1>
+								<h2>Delivering great food for more than 18 years!</h2>
+
+								<div class="btns">
+									<a href="#menu" class="btn-menu animated fadeInUp scrollto">Our Menu</a>
+									<a href="#book-a-table" class="btn-book animated fadeInUp scrollto">Book a Table</a>
+								</div>
+							</div>
+							<div class="col-lg-4 d-flex align-items-center justify-content-center position-relative" data-aos="zoom-in" data-aos-delay="200">
+								<a href="https://www.youtube.com/watch?v=GlrxcuEDyF8" class="glightbox play-btn"></a>
 							</div>
 
-							<div class="languages d-none d-md-flex align-items-center">
-								<ul>
-									<li>En</li>
-									<li>
-										<a href="#">De</a>
-									</li>
-								</ul>
+						</div>
+					</div>
+				</section>
+				<!-- End Hero -->
+
+				<footer id="footer">
+					<div class="footer-top">
+						<div class="container">
+							<div class="row">
+
+								<div class="col-lg-3 col-md-6">
+									<div class="footer-info">
+										<h3>Restaurantly</h3>
+										<p>
+											A108 Adam Street <br/>
+											NY 535022, USA<br/>
+											<br/>
+											<strong>Phone:</strong> +1 5589 55488 55<br/>
+											<strong>Email:</strong> info@example.com<br/>
+										</p>
+										<div class="social-links mt-3">
+											<a href="#" class="twitter">
+												<i class="bx bxl-twitter"></i>
+											</a>
+											<a href="#" class="facebook">
+												<i class="bx bxl-facebook"></i>
+											</a>
+											<a href="#" class="instagram">
+												<i class="bx bxl-instagram"></i>
+											</a>
+											<a href="#" class="google-plus">
+												<i class="bx bxl-skype"></i>
+											</a>
+											<a href="#" class="linkedin">
+												<i class="bx bxl-linkedin"></i>
+											</a>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-lg-2 col-md-6 footer-links">
+									<h4>Useful Links</h4>
+									<ul>
+										<li>
+											<i class="bx bx-chevron-right"></i>
+											<a href="#">Home</a>
+										</li>
+										<li>
+											<i class="bx bx-chevron-right"></i>
+											<a href="#">About us</a>
+										</li>
+										<li>
+											<i class="bx bx-chevron-right"></i>
+											<a href="#">Services</a>
+										</li>
+										<li>
+											<i class="bx bx-chevron-right"></i>
+											<a href="#">Terms of service</a>
+										</li>
+										<li>
+											<i class="bx bx-chevron-right"></i>
+											<a href="#">Privacy policy</a>
+										</li>
+									</ul>
+								</div>
+
+								<div class="col-lg-3 col-md-6 footer-links">
+									<h4>Our Services</h4>
+									<ul>
+										<li>
+											<i class="bx bx-chevron-right"></i>
+											<a href="#">Web Design</a>
+										</li>
+										<li>
+											<i class="bx bx-chevron-right"></i>
+											<a href="#">Web Development</a>
+										</li>
+										<li>
+											<i class="bx bx-chevron-right"></i>
+											<a href="#">Product Management</a>
+										</li>
+										<li>
+											<i class="bx bx-chevron-right"></i>
+											<a href="#">Marketing</a>
+										</li>
+										<li>
+											<i class="bx bx-chevron-right"></i>
+											<a href="#">Graphic Design</a>
+										</li>
+									</ul>
+								</div>
+
+								<div class="col-lg-4 col-md-6 footer-newsletter">
+									<h4>Our Newsletter</h4>
+									<p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+									<form action="" method="post">
+										<input type="email" name="email"/>
+										<input type="submit" value="Subscribe"/>
+
+									</form>
+
+								</div>
+
 							</div>
 						</div>
 					</div>
 
-					<!-- ======= Header ======= -->
-					<header id="header" class="fixed-top d-flex align-items-cente">
-						<div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
-
-							<h1 class="logo me-auto me-lg-0">
-								<a href="index.html">Restaurantly</a>
-							</h1>
-							<!-- Uncomment below if you prefer to use an image logo -->
-							<!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
-							<nav id="navbar" class="navbar order-last order-lg-0">
-								<ul>
-									<li>
-										<a class="nav-link scrollto active" href="#hero">Home</a>
-									</li>
-									<li>
-										<a class="nav-link scrollto" href="#about">About</a>
-									</li>
-									<li>
-										<a class="nav-link scrollto" href="#menu">Menu</a>
-									</li>
-									<li>
-										<a class="nav-link scrollto" href="#specials">Specials</a>
-									</li>
-									<li>
-										<a class="nav-link scrollto" href="#events">Events</a>
-									</li>
-									<li>
-										<a class="nav-link scrollto" href="#chefs">Chefs</a>
-									</li>
-									<li>
-										<a class="nav-link scrollto" href="#gallery">Gallery</a>
-									</li>
-									<li class="dropdown">
-										<a href="#">
-											<span>Drop Down</span>
-											<i class="bi bi-chevron-down"></i>
-										</a>
-										<ul>
-											<li>
-												<a href="#">Drop Down 1</a>
-											</li>
-											<li class="dropdown">
-												<a href="#">
-													<span>Deep Drop Down</span>
-													<i class="bi bi-chevron-right"></i>
-												</a>
-												<ul>
-													<li>
-														<a href="#">Deep Drop Down 1</a>
-													</li>
-													<li>
-														<a href="#">Deep Drop Down 2</a>
-													</li>
-													<li>
-														<a href="#">Deep Drop Down 3</a>
-													</li>
-													<li>
-														<a href="#">Deep Drop Down 4</a>
-													</li>
-													<li>
-														<a href="#">Deep Drop Down 5</a>
-													</li>
-												</ul>
-											</li>
-											<li>
-												<a href="#">Drop Down 2</a>
-											</li>
-											<li>
-												<a href="#">Drop Down 3</a>
-											</li>
-											<li>
-												<a href="#">Drop Down 4</a>
-											</li>
-										</ul>
-									</li>
-									<li>
-										<a class="nav-link scrollto" href="#contact">Contact</a>
-									</li>
-								</ul>
-								<i class="bi bi-list mobile-nav-toggle"></i>
-							</nav>
-							<!-- .navbar -->
-							<a href="#book-a-table" class="book-a-table-btn scrollto d-none d-lg-flex">Book a table</a>
-
+					<div class="container">
+						<div class="copyright">
+							Copyrigth <strong>
+								<span>Restaurantly</span>
+							</strong>. All Rights Reserved
 						</div>
-					</header>
-					<!-- End Header -->
-
-					<!-- ======= Hero Section ======= -->
-					<section id="hero" class="d-flex align-items-center">
-						<div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
-							<div class="row">
-								<div class="col-lg-8">
-									<h1>
-										Welcome to <span>Restaurantly</span>
-									</h1>
-									<h2>Delivering great food for more than 18 years!</h2>
-
-									<div class="btns">
-										<a href="#menu" class="btn-menu animated fadeInUp scrollto">Our Menu</a>
-										<a href="#book-a-table" class="btn-book animated fadeInUp scrollto">Book a Table</a>
-									</div>
-								</div>
-								<div class="col-lg-4 d-flex align-items-center justify-content-center position-relative" data-aos="zoom-in" data-aos-delay="200">
-									<a href="https://www.youtube.com/watch?v=GlrxcuEDyF8" class="glightbox play-btn"></a>
-								</div>
-
-							</div>
+						<div class="credits">
+							<!-- All the links in the footer should remain intact. -->
+							<!-- You can delete the links only if you purchased the pro version. -->
+							<!-- Licensing information: https://bootstrapmade.com/license/ -->
+							<!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/restaurantly-restaurant-template/ -->
+							Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
 						</div>
-					</section>
-					<!-- End Hero -->
+					</div>
+				</footer>
+				<!-- End Footer -->
 
-					<footer id="footer">
-						<div class="footer-top">
-							<div class="container">
-								<div class="row">
+				<div id="preloader"></div>
+				<a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+					<i class="bi bi-arrow-up-short"></i>
+				</a>
 
-									<div class="col-lg-3 col-md-6">
-										<div class="footer-info">
-											<h3>Restaurantly</h3>
-											<p>
-												A108 Adam Street <br/>
-												NY 535022, USA<br/>
-												<br/>
-												<strong>Phone:</strong> +1 5589 55488 55<br/>
-												<strong>Email:</strong> info@example.com<br/>
-											</p>
-											<div class="social-links mt-3">
-												<a href="#" class="twitter">
-													<i class="bx bxl-twitter"></i>
-												</a>
-												<a href="#" class="facebook">
-													<i class="bx bxl-facebook"></i>
-												</a>
-												<a href="#" class="instagram">
-													<i class="bx bxl-instagram"></i>
-												</a>
-												<a href="#" class="google-plus">
-													<i class="bx bxl-skype"></i>
-												</a>
-												<a href="#" class="linkedin">
-													<i class="bx bxl-linkedin"></i>
-												</a>
-											</div>
-										</div>
-									</div>
+				<!-- Vendor JS Files -->
+				<script src="assets/vendor/aos/aos.js"></script>
+				<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+				<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+				<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+				<script src="assets/vendor/php-email-form/validate.js"></script>
+				<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
-									<div class="col-lg-2 col-md-6 footer-links">
-										<h4>Useful Links</h4>
-										<ul>
-											<li>
-												<i class="bx bx-chevron-right"></i>
-												<a href="#">Home</a>
-											</li>
-											<li>
-												<i class="bx bx-chevron-right"></i>
-												<a href="#">About us</a>
-											</li>
-											<li>
-												<i class="bx bx-chevron-right"></i>
-												<a href="#">Services</a>
-											</li>
-											<li>
-												<i class="bx bx-chevron-right"></i>
-												<a href="#">Terms of service</a>
-											</li>
-											<li>
-												<i class="bx bx-chevron-right"></i>
-												<a href="#">Privacy policy</a>
-											</li>
-										</ul>
-									</div>
+				<!-- Template Main JS File -->
+				<script src="assets/js/main.js"></script>
 
-									<div class="col-lg-3 col-md-6 footer-links">
-										<h4>Our Services</h4>
-										<ul>
-											<li>
-												<i class="bx bx-chevron-right"></i>
-												<a href="#">Web Design</a>
-											</li>
-											<li>
-												<i class="bx bx-chevron-right"></i>
-												<a href="#">Web Development</a>
-											</li>
-											<li>
-												<i class="bx bx-chevron-right"></i>
-												<a href="#">Product Management</a>
-											</li>
-											<li>
-												<i class="bx bx-chevron-right"></i>
-												<a href="#">Marketing</a>
-											</li>
-											<li>
-												<i class="bx bx-chevron-right"></i>
-												<a href="#">Graphic Design</a>
-											</li>
-										</ul>
-									</div>
-
-									<div class="col-lg-4 col-md-6 footer-newsletter">
-										<h4>Our Newsletter</h4>
-										<p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-										<form action="" method="post">
-											<input type="email" name="email"/>
-											<input type="submit" value="Subscribe"/>
-
-										</form>
-
-									</div>
-
-								</div>
-							</div>
-						</div>
-
-						<div class="container">
-							<div class="copyright">
-								Copyrigth <strong>
-									<span>Restaurantly</span>
-								</strong>. All Rights Reserved
-							</div>
-							<div class="credits">
-								<!-- All the links in the footer should remain intact. -->
-								<!-- You can delete the links only if you purchased the pro version. -->
-								<!-- Licensing information: https://bootstrapmade.com/license/ -->
-								<!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/restaurantly-restaurant-template/ -->
-								Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-							</div>
-						</div>
-					</footer>
-					<!-- End Footer -->
-
-					<div id="preloader"></div>
-					<a href="#" class="back-to-top d-flex align-items-center justify-content-center">
-						<i class="bi bi-arrow-up-short"></i>
-					</a>
-
-					<!-- Vendor JS Files -->
-					<script src="assets/vendor/aos/aos.js"></script>
-					<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-					<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-					<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-					<script src="assets/vendor/php-email-form/validate.js"></script>
-					<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-
-					<!-- Template Main JS File -->
-					<script src="assets/js/main.js"></script>
-
-				</body>
-			</html>
+			</body>
+		</html>
 	</xsl:template>
 </xsl:stylesheet>
