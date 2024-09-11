@@ -6,10 +6,11 @@
 
 	<xsl:param name="TipoMenu" select="TipoMenu">
 	</xsl:param>
-	
+
 	<xsl:template match="Menu">
 
 		<html lang="en">
+
 			<head>
 				<meta charset="utf-8"/>
 				<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -44,7 +45,6 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 			</head>
-
 
 			<body>
 				<!-- ======= Top Bar ======= -->
@@ -140,6 +140,27 @@
 				</section>
 				<!-- End Hero -->
 
+				<!--=========Chose section ============-->
+				<xsl:choose>
+					<xsl:when test ="$TipoMenu = 0">
+						<!--xsl:call-template	me ayuda a invoacar un template que contiene informacion o 
+						escructurar dentro sel mismo y asi inferirlo dentro del template principal-->
+						<xsl:call-template name="Home">	</xsl:call-template>
+					</xsl:when>
+					<xsl:when test ="$TipoMenu = 1">
+						<xsl:call-template name="Carta"></xsl:call-template>
+					</xsl:when>
+					<xsl:when test ="$TipoMenu = 2">
+						<xsl:call-template name="Contacto"></xsl:call-template>
+					</xsl:when>
+					<xsl:when test ="$TipoMenu = 3">
+						<xsl:call-template name="PlayRoom"></xsl:call-template>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:call-template name="Home">	</xsl:call-template>
+					</xsl:otherwise>
+				</xsl:choose>
+				<!--End Choose-->
 				<footer id="footer">
 					<div class="footer-top">
 						<div class="container">
@@ -276,6 +297,69 @@
 				<script src="assets/js/main.js"></script>
 
 			</body>
+
 		</html>
 	</xsl:template>
+	<xsl:template name ="Home">
+		<!-- ======= Why Us Section ======= -->
+		<section id="why-us" class="why-us">
+			<div class="container" data-aos="fade-up">
+
+				<div class="section-title">
+					<h2>Popular Items</h2>
+					<p>Nuestros Mejores Platillos</p>
+				</div>
+
+				<div class="row">
+
+					<xsl:for-each select="Platillos/Tipo[@Nombre != 'Bebidas']/Platillo[@Orden=1]">
+						<div class="col-lg-4 mt-4 mt-lg-0">
+							<div class="box" data-aos="zoom-in" data-aos-delay="300">
+								<div class="section-title">
+									<!--Aqui muestro el nombre del tipo-->
+									<h2>
+										<xsl:value-of select="../@Nombre"/>
+									</h2>
+								</div>
+									
+								<h4>
+									<!--Aqui muestro el nombre del platillo-->
+									<span style="display: contents;">
+										<!--substring(cadena, lugar inicial, numero de pasos)-->
+										<xsl:value-of select="substring(@Nombre, 1, 1)"/>
+									</span>
+										<!--string-length(cadena)=> el total de datos de la cadena-->
+										<xsl:value-of select="substring(@Nombre, 2, string-length(@Nombre))"/>
+								</h4>
+								<p>
+									<!--Aqui muestro la descripcion del platillo-->
+									<xsl:value-of select="Descripcion"/>
+								</p>
+								<h5>
+									<!--aqui muestr el precio-->
+									<xsl:value-of select="Precio"/>
+								</h5>
+								<br></br>
+								<img src="{Imagen}" alt="" style="width: 100%; height: auto;"/>
+							</div>
+						</div>
+					</xsl:for-each>
+
+				</div>
+
+			</div>
+		</section>
+		<!-- End Why Us Section -->
+	</xsl:template>
+	<xsl:template name ="Carta">
+		<h1>Hola desde Carta</h1>
+	</xsl:template>
+	<xsl:template name ="Contacto">
+		<h1>Hola desde Contacto</h1>
+	</xsl:template>
+	<xsl:template name ="PlayRoom">
+		<h1>Hola desde PlayRoom</h1>
+	</xsl:template>
+
+
 </xsl:stylesheet>
