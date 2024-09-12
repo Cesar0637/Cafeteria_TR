@@ -154,7 +154,9 @@
     <Content Include="Web.config" />
     <Content Include="WebForm1.aspx" />
     <Content Include="xml\menu.xml" />
-    <Content Include="xslt\XSLTFile1.xslt" />
+    <Content Include="xslt\XSLTFile1.xslt">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
