@@ -38,6 +38,7 @@
 				<!-- Template Main CSS File -->
 				<link href="assets/css/style.css" rel="stylesheet"/>
 				<!--js-->
+				<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 				<script type="text/javascript" src="assets/js/jquery-1.11.2.min.js"> </script>
 
 				<!-- =======================================================
@@ -564,6 +565,9 @@
 	</xsl:template>
 	<xsl:template name ="Contacto">
 		<!-- ======= Contact Section ======= -->
+		<!--referencia JS-->
+		<script src ="assets/js/MiScript.js" type="text/javascript"></script>
+
 		<section id="contact" class="contact">
 			<div class="container" data-aos="fade-up">
 
@@ -644,13 +648,13 @@
 									<input type="text" name="contact_name" class="form-control" id="contact_name" placeholder="Your Name" required=""/>
 								</div>
 								<div class="col-md-6 form-group mt-3 mt-md-0">
-									<input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required=""/>
+									<input type="email" class="form-control" name="contact_email" id="contact_email" placeholder="Your Email" required=""/>
 								</div>
 							</div>
 
 							<div class="row">
 								<div class="col-md-6 form-group">
-									<input type="text" name="contact_name" class="form-control" id="contact_name" placeholder="Your Name" required="true"/>
+									<input type="text" name="contact_people" class="form-control" id="contact_people" placeholder="numero de personas" required="true"/>
 								</div>
 								<div class="col-md-6 form-group mt-3 mt-md-0">
 									<input type="number" class="form-control" name="contact_add" id="contact_add" placeholder="# numero de personas adicionales" required="true" max="4" min="0"/>
@@ -682,28 +686,29 @@
 				</div>
 
 			</div>
+
 			<script>
-				$(document).ready(function(){
+				$(document).ready(function () {
 				console.log("Hola desde el script usando JQUERY");
 
 				//recuperar la fecha actual del servidor (dodne se ejecuta el sistema)
 				var now = new Date(Date.now());
 
-				var timeControl= document.getElementById("contact_hora");
+				var timeControl = document.getElementById("contact_hora");
 
 				var horas = now.getHours();
 
 				var minutos = now.getMinutes();
 
-				console.log("la hora actual es : "+ horas + ":" + minutos);
-				console.log("HORAS: "+ horas);
+				console.log("la hora actual es : " + horas + ":" + minutos);
+				console.log("HORAS: " + horas);
 				console.log("minutos:  " + minutos);
 				console.log("timeControl: ");
 				console.log(timeControl);
-				if(horas<![CDATA[<]]>10){
-					horas= "0" + horas;
+				if (horas <![CDATA[<]]> 10) {
+				horas = "0" + horas;
 				}
-				if(minutos<![CDATA[<]]>10){
+				if (minutos <![CDATA[<]]> 10) {
 				minutos = "0" + minutos;
 				}
 				var formatted = horas + ":" + minutos;
@@ -719,13 +724,22 @@
 				var dia = now.getDate();
 				var mes = now.getMonth() + 1;
 				var anio = now.getFullYear();
-				mes = mes <![CDATA[<]]>  10 ? "0" + mes : mes;
-				dia = dia <![CDATA[<]]>  10 ? "0" + dia : dia;
-				var fechaFormatted = anio + "-" + mes + "-" + dia ;
+				mes = mes <![CDATA[<]]> 10 ? "0" + mes : mes;
+				dia = dia <![CDATA[<]]> 10 ? "0" + dia : dia;
+				var fechaFormatted = anio + "-" + mes + "-" + dia;
 				console.log("fechaFormatted: " + fechaFormatted);
-				$("#contact_fecha").attr("value",fechaFormatted)
+				$("#contact_fecha").attr("value", fechaFormatted)
+
+				getGeo()
+
 				});
+				var personas = document.getElementById('contact_people')
+				var personas_add = document.getElementById('contact_add')
+				personas.value = 1
+				personas_add.value = 0
+				validar();
 			</script>
+
 		</section>
 		<!-- End Contact Section -->
 	</xsl:template>
