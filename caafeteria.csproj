@@ -107,6 +107,8 @@
     <Content Include="assets\img\testimonials\testimonials-3.jpg" />
     <Content Include="assets\img\testimonials\testimonials-4.jpg" />
     <Content Include="assets\img\testimonials\testimonials-5.jpg" />
+    <Content Include="assets\css\DragAndDrop.css" />
+    <Content Include="assets\js\DragAndDrop.js" />
     <Content Include="assets\js\jquery-1.11.2.min.js" />
     <Content Include="assets\js\main.js" />
     <Content Include="assets\js\MiScript.js" />
